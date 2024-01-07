@@ -1,8 +1,12 @@
+import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("com.google.devtools.ksp")
 }
+
+val musicApi: String = gradleLocalProperties(rootDir).getProperty("music.api")
 
 android {
     namespace = "zechs.music"
@@ -14,6 +18,8 @@ android {
         targetSdk = 34
         versionCode = 1
         versionName = "1.0.0"
+
+        buildConfigField("String", "MUSIC_API", "\"${musicApi}\"")
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
