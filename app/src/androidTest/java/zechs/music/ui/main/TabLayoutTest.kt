@@ -3,6 +3,7 @@ package zechs.music.ui.main
 
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.*
 import androidx.test.espresso.assertion.ViewAssertions.*
@@ -65,7 +66,7 @@ class TabLayoutTest {
                 withParent(
                     allOf(
                         withContentDescription("Playlists"),
-                        withParent(IsInstanceOf.instanceOf(android.widget.LinearLayout::class.java))
+                        withParent(IsInstanceOf.instanceOf(LinearLayout::class.java))
                     )
                 ),
                 isDisplayed()
@@ -111,7 +112,7 @@ class TabLayoutTest {
                 withParent(
                     allOf(
                         withContentDescription("Albums"),
-                        withParent(IsInstanceOf.instanceOf(android.widget.LinearLayout::class.java))
+                        withParent(IsInstanceOf.instanceOf(LinearLayout::class.java))
                     )
                 ),
                 isDisplayed()
@@ -134,7 +135,7 @@ class TabLayoutTest {
                 withParent(
                     allOf(
                         withContentDescription("Artists"),
-                        withParent(IsInstanceOf.instanceOf(android.widget.LinearLayout::class.java))
+                        withParent(IsInstanceOf.instanceOf(LinearLayout::class.java))
                     )
                 ),
                 isDisplayed()
