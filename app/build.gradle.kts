@@ -4,6 +4,7 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("androidx.navigation.safeargs.kotlin")
+    id("dagger.hilt.android.plugin")
     id("com.google.devtools.ksp")
 }
 
@@ -56,6 +57,11 @@ dependencies {
     val moshiVersion = "1.15.0"
     val kotlinKtxVersion = "1.12.0"
     val kotlinCoroutinesVersion = "1.7.3"
+    val hiltVersion = "2.50"
+
+    // Dagger - Hilt
+    implementation("com.google.dagger:hilt-android:$hiltVersion")
+    ksp("com.google.dagger:hilt-compiler:$hiltVersion")
 
     // Networking with Retrofit
     implementation("com.squareup.retrofit2:retrofit:$retrofitVersion")
