@@ -1,5 +1,7 @@
 package zechs.music.data.model
 
+import zechs.music.utils.AlbumArtHelper
+
 data class SongsResponse(
     val _id: String,
     val albumId: String,
@@ -15,4 +17,6 @@ data class SongsResponse(
     val sampleRate: Int,
     val trackName: String,
     val trackNumber: Int
-)
+) {
+    fun albumArt() = AlbumArtHelper.withArt(albumId)
+}

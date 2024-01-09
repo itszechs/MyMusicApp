@@ -59,6 +59,13 @@ dependencies {
     val kotlinCoroutinesVersion = "1.7.3"
     val hiltVersion = "2.50"
 
+    // Glide
+    implementation("com.github.bumptech.glide:glide:4.16.0")
+    implementation("com.github.bumptech.glide:recyclerview-integration:4.14.2") {
+        // Excludes the support library because it's already included by Glide.
+        isTransitive = false
+    }
+
     // Dagger - Hilt
     implementation("com.google.dagger:hilt-android:$hiltVersion")
     ksp("com.google.dagger:hilt-compiler:$hiltVersion")
