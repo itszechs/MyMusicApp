@@ -20,6 +20,9 @@ class AlbumsViewModel @Inject constructor(
     private val _albums = MutableStateFlow<Resource<List<AlbumsResponse>>>(Resource.Loading())
     val albums = _albums.asStateFlow()
 
+    var hasLoaded = false
+        private set
+
     init {
         fetchAlbums()
     }
@@ -28,6 +31,7 @@ class AlbumsViewModel @Inject constructor(
         val response = musicRepository.getAlbums(page = 1)
         if (response is Resource.Success) {
             _albums.value = Resource.Success(response.data!!.results)
+            hasLoaded = true
         } else {
             _albums.value = Resource.Error(response.message!!)
         }
