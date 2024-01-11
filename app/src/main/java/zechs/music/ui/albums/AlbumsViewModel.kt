@@ -23,18 +23,37 @@ class AlbumsViewModel @Inject constructor(
     var hasLoaded = false
         private set
 
+    var page = 1
+        private set
+
+    var isLastPage = false
+        private set
+
+    var isLoading = false
+        private set
+
+    private var albumsResponse = mutableListOf<AlbumsResponse>()
+
     init {
         fetchAlbums()
     }
 
-    private fun fetchAlbums() = viewModelScope.launch(Dispatchers.IO) {
-        val response = musicRepository.getAlbums(page = 1)
+    fun fetchAlbums() = viewModelScope.launch(Dispatchers.IO) {
+        if (!hasLoaded) page = 1
+        isLoading = true
+        val response = musicRepository.getAlbums(page)
         if (response is Resource.Success) {
-            _albums.value = Resource.Success(response.data!!.results)
             hasLoaded = true
+            val data = response.data!!
+            albumsResponse.addAll(data.results)
+            _albums.value = Resource.Success(albumsResponse)
+            isLastPage = data.isLastPage()
+            if (!isLastPage) page++
         } else {
             _albums.value = Resource.Error(response.message!!)
         }
+        isLoading = false
     }
+
 
 }

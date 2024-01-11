@@ -12,6 +12,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.transition.MaterialFadeThrough
 import com.google.android.material.transition.MaterialSharedAxis
@@ -103,6 +104,27 @@ class AlbumsFragment : Fragment() {
         }
     }
 
+
+    private val scrollListener = object : RecyclerView.OnScrollListener() {
+        override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+            super.onScrolled(recyclerView, dx, dy)
+            if (dy > 0) {
+                val layoutManager = binding.rvList.layoutManager as GridLayoutManager
+                val visibleItemCount = layoutManager.findLastCompletelyVisibleItemPosition() + 1
+                val itemCount = layoutManager.itemCount
+
+                if (visibleItemCount == itemCount && !viewModel.isLoading && !viewModel.isLastPage) {
+                    Log.d(
+                        "onScrolled",
+                        "visibleItemCount=$visibleItemCount, itemCount=$itemCount, " +
+                                "isLoading=${viewModel.isLoading} isLastPage=${viewModel.isLastPage}"
+                    )
+                    viewModel.fetchAlbums()
+                }
+            }
+        }
+    }
+
     private fun setupRecyclerView() {
         val gridLayoutManager = GridLayoutManager(
             /* context */ context,
@@ -111,11 +133,13 @@ class AlbumsFragment : Fragment() {
         binding.rvList.apply {
             adapter = albumsAdapter
             layoutManager = gridLayoutManager
+            addOnScrollListener(scrollListener)
         }
     }
 
     override fun onDestroy() {
         super.onDestroy()
+        binding.rvList.removeOnScrollListener(scrollListener)
         binding.rvList.adapter = null
         _binding = null
     }
