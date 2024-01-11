@@ -1,5 +1,6 @@
 package zechs.music.ui.albums
 
+import android.content.res.Configuration
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -126,9 +127,11 @@ class AlbumsFragment : Fragment() {
     }
 
     private fun setupRecyclerView() {
+        val screenOrientation = resources.configuration.orientation
+        val spanCount = if (screenOrientation == Configuration.ORIENTATION_PORTRAIT) 2 else 5
         val gridLayoutManager = GridLayoutManager(
             /* context */ context,
-            /* spanCount */ 2
+            /* spanCount */ spanCount
         )
         binding.rvList.apply {
             adapter = albumsAdapter
