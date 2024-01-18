@@ -7,4 +7,5 @@
     <string name="shuffle">Shuffle</string>
     <string name="play">Play</string>
     <string name="separator">\u25CF</string>
+    <string name="disc_number">Disc %1$d</string>
 </resources>

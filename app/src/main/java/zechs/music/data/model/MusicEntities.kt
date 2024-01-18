@@ -1,5 +1,8 @@
 package zechs.music.data.model
 
+import zechs.music.ui.album_view.adapter.AlbumModel
+import zechs.music.utils.AlbumArtHelper
+
 
 data class Album(
     val _id: String,
@@ -22,7 +25,20 @@ data class Track(
     val sampleRate: Int,
     val trackName: String,
     val trackNumber: Int
-)
+) {
+
+    fun albumArt() = AlbumArtHelper.withArt(albumId)
+
+    fun toAlbumModelTrack() = AlbumModel.Track(
+        fileId = fileId,
+        trackName = trackName,
+        artistName = artistName,
+        trackNumber = trackNumber,
+        discNumber = discNumber,
+        duration = duration,
+        albumArt = albumArt()
+    )
+}
 
 data class Artist(
     val _id: String,
