@@ -9,6 +9,29 @@
         android:id="@+id/homeFragment"
         android:name="zechs.music.ui.home.HomeFragment"
         android:label="HomeFragment"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_homeFragment_to_albumViewFragment"
+            app:destination="@id/albumViewFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/albumViewFragment"
+        android:name="zechs.music.ui.album_view.AlbumViewFragment"
+        android:label="AlbumViewFragment">
+        <argument
+            android:name="albumId"
+            app:argType="string" />
+        <argument
+            android:name="albumName"
+            app:argType="string" />
+        <argument
+            android:name="albumArtistName"
+            app:argType="string" />
+        <argument
+            android:name="releaseYear"
+            app:argType="integer" />
+    </fragment>
+
 
 </navigation>

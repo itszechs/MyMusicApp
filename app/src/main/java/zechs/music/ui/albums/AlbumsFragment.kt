@@ -12,14 +12,18 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.transition.MaterialFadeThrough
 import com.google.android.material.transition.MaterialSharedAxis
 import kotlinx.coroutines.launch
+import zechs.music.data.model.AlbumsResponse
 import zechs.music.databinding.FragmentListBinding
 import zechs.music.ui.albums.adapter.AlbumsAdapter
+import zechs.music.ui.home.HomeFragmentDirections
 import zechs.music.utils.ext.doTransition
 import zechs.music.utils.state.Resource
 
@@ -33,7 +37,17 @@ class AlbumsFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val albumsAdapter by lazy {
-        AlbumsAdapter(onClick = {})
+        AlbumsAdapter(onClick = { navigateToAlbum(it) })
+    }
+
+    private fun navigateToAlbum(album: AlbumsResponse) {
+        val action = HomeFragmentDirections.actionHomeFragmentToAlbumViewFragment(
+            albumId = album.albumId,
+            albumName = album.albumName,
+            albumArtistName = album.artistName,
+            releaseYear = album.year
+        )
+        findNavController().navigate(action)
     }
 
     private val viewModel by activityViewModels<AlbumsViewModel>()
@@ -104,7 +118,6 @@ class AlbumsFragment : Fragment() {
             rvList.isInvisible = hide
         }
     }
-
 
     private val scrollListener = object : RecyclerView.OnScrollListener() {
         override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {

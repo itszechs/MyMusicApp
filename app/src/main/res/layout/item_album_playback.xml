@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="24dp"
+    android:layout_marginEnd="24dp"
+    android:layout_marginBottom="8dp"
+    android:orientation="horizontal">
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnPlayAlbum"
+        style="@style/Widget.Material3.Button.IconButton.Filled"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="?attr/colorOnSurface"
+        android:layout_marginEnd="4dp"
+        android:layout_weight="1"
+        android:padding="12dp"
+        android:text="@string/play"
+        app:icon="@drawable/ic_play_24"
+        app:iconGravity="textStart" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnShuffle"
+        style="@style/Widget.Material3.Button.OutlinedButton.Icon"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_weight="1"
+        android:padding="12dp"
+        android:text="@string/shuffle"
+        android:textColor="?attr/colorOnSurface"
+        app:icon="@drawable/ic_shuffle_24"
+        app:iconGravity="textStart"
+        app:iconTint="?attr/colorOnSurface" />
+</LinearLayout>
